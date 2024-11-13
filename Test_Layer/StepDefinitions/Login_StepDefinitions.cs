@@ -49,19 +49,21 @@ namespace Test_Layer.StepDefinitions
         [Then(@"I should be redirected to the inventory page")]
         public void ThenIShouldBeRedirectedToTheInventoryPage()
         {
-            // Assert page URL or page title
+            Assert.AreEqual("https://www.saucedemo.com/inventory.html", _driver.Url);
         }
 
         [Then(@"I should see an error message")]
         public void ThenIShouldSeeAnErrorMessage()
         {
-            // Assert error message visibility
+            var errorMessage = _driver.FindElement(By.CssSelector("h3[data-test='error']")).Text;
+            Assert.IsTrue(errorMessage.Contains("Username and password do not match"));
         }
 
         [Then(@"I should see a lockout message")]
         public void ThenIShouldSeeALockoutMessage()
         {
-            // Assert lockout message visibility
+            var lockoutMessage = _driver.FindElement(By.CssSelector("h3[data-test='error']")).Text;
+            Assert.IsTrue(lockoutMessage.Contains("Sorry, this user has been locked out."));
         }
     }
 }
